@@ -8,12 +8,37 @@
 function Manager(opts) {
 	this.id = Math.random();
 
+	var currentTabIds = localStorage.tabIds;
+	var tabIds;
+
+	if (currentTabIds) {
+		tabIds = JSON.parse(currentTabIds);
+		tabIds.push(this.id);
+	} else {
+		tabIds = [this.id];
+	}
+
+	try {
+        localStorage.setItem('tabIds', JSON.stringify(tabIds));
+    } catch (error) {}
+
 	// Listen to event when tab is closed or storage changes
 	window.addEventListener('storage', this, false);
 	window.addEventListener('unload', this, false);
 }
 
 Manager.prototype.destroy = function () {
+	var currentTabIds = localStorage.tabIds;
+	var tabIds = JSON.parse(currentTabIds);
+
+	// Remove the current tabIds from storage array
+	var index = tabIds.indexOf(this.id);
+    tabIds.splice(index, 1);
+
+	try {
+        localStorage.setItem('tabIds', JSON.stringify(tabIds));
+    } catch (error) {}
+
     window.removeEventListener( 'storage', this, false );
     window.removeEventListener( 'unload', this, false );
 };
