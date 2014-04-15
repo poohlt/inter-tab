@@ -1,69 +1,70 @@
-(function() {
+/**
+ * Constructor for the inter-tab manager
+ *
+ * @param {Object} options
+ * @api public
+ */
 
-	/**
-	 * Constructor for the inter-tab manager
-	 *
-	 * @param {Object} options
-	 * @api public
+function Manager(opts) {
+	/*
+	 * TODO:
+	 * See if tabs associated with this domain are also using inter-tab
+	 * Add self to tab array
 	 */
-
-	function Manager(opts) {
-		/*
-		 * TODO:
-		 * See if tabs associated with this domain are also using inter-tab
-		 * Add self to tab array
-		 * ???
-		 * PROFIT!!1
-		 */
-	}
+}
 
 
-	/**
-	 * Broadcast message to all managed tabs
-	 *
-	 */
+/**
+ * Broadcast message to all managed tabs
+ *
+ */
 
-	Manager.broadcast = function (key, value) {
+Manager.prototype.broadcast = function (key, value) {
+	var data = {
+		key: key,
+		value: value
+	};
 
-	}
-
-
-	/**
-	 * Send message to a specific tab
-	 *
-	 */
-
-	Manager.send = function (id, key, value) {
-
-	}
+    try {
+        localStorage.setItem( 'broadcast', JSON.stringify(data));
+    } catch (error) {}
+};
 
 
-	/**
-	 * Associate data with a specific tab
-	 *
-	 */
+/**
+ * Send message to a specific tab
+ *
+ */
 
-	Manager.set = function (id, key, value) {
+Manager.prototype.send = function (id, key, value) {
 
-	}
-
-
-	/**
-	 * Retrieve data for a specific tab
-	 *
-	 */
-
-	Manager.get = function (id, key) {
-
-	}
+};
 
 
-	// Expose the inter-tab manager
+/**
+ * Associate data with a specific tab
+ *
+ */
 
-	if (typeof module === 'object' && module.exports) {
-    module.exports = Manager;
-  } else {
-    this.it = Manager;
-  }
+Manager.prototype.set = function (id, key, value) {
 
-}).call(this);
+};
+
+
+/**
+ * Retrieve data for a specific tab
+ *
+ */
+
+Manager.prototype.get = function (id, key) {
+
+};
+
+
+// Expose the inter-tab manager
+
+// if (typeof module === 'object' && module.exports) {
+//     module.exports = Manager;
+// } else {
+//     this.it = Manager;
+// }
