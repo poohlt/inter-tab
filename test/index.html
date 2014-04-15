@@ -6,19 +6,20 @@
 </head>
 <body style="">
   <script type="text/javascript" charset="utf-8">
-    var wc = new WindowController();
-    wc.logMessage = function ( data ) {
-      data.text;
-    };
-    wc.masterDidChange();
-    var input = $( 'input' );
-    function broadcast () {
-        var value = input.value;
-        input.value = '';
-        if ( value ) {
-          wc.broadcast( 'logMessage', { text: value });
-        }
-    };
+    // var wc = new WindowController();
+    // wc.logMessage = function ( data ) {
+    //   data.text;
+    // };
+    // wc.masterDidChange();
+    // var input = $( 'input' );
+    // function broadcast () {
+    //     var value = input.value;
+    //     input.value = '';
+    //     if ( value ) {
+    //       wc.broadcast( 'logMessage', { text: value });
+    //     }
+    // };
+    var test = new Manager();
   </script>
 </body>
 </html>

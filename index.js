@@ -11,6 +11,10 @@ function Manager(opts) {
 	 * See if tabs associated with this domain are also using inter-tab
 	 * Add self to tab array
 	 */
+
+	// Listen to event when tab is closed or storage changes
+	window.addEventListener('storage', this, false);
+	window.addEventListener('unload', this, false);
 }
 
 
@@ -30,6 +34,20 @@ Manager.prototype.broadcast = function (key, value) {
     } catch (error) {}
 };
 
+Manager.prototype.handleEvent = function (event) {
+    // if ( event.type === 'unload' ) {
+    //     this.destroy();
+    // } else if ( event.key === 'broadcast' ) {
+    //     try {
+    //         var data = JSON.parse( event.newValue );
+    //         if ( data.id !== this.id ) {
+    //             this[ data.type ]( data );
+    //         }
+    //     } catch ( error ) {}
+    // }
+    console.log(event);
+    debugger;
+};
 
 /**
  * Send message to a specific tab

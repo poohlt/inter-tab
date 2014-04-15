@@ -6,9 +6,9 @@ var file = new static.Server('../');
 
 require('http').createServer(function (request, response) {
     request.addListener('end', function () {
-        //
         // Serve files!
-        //
         file.serve(request, response);
     }).resume();
 }).listen(8080);
+
+console.log('Listening on 8080');
