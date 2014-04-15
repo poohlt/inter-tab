@@ -6,17 +6,17 @@
  */
 
 function Manager(opts) {
-	/*
-	 * TODO:
-	 * See if tabs associated with this domain are also using inter-tab
-	 * Add self to tab array
-	 */
+	this.id = Math.random();
 
 	// Listen to event when tab is closed or storage changes
 	window.addEventListener('storage', this, false);
 	window.addEventListener('unload', this, false);
 }
 
+Manager.prototype.destroy = function () {
+    window.removeEventListener( 'storage', this, false );
+    window.removeEventListener( 'unload', this, false );
+};
 
 /**
  * Broadcast message to all managed tabs
@@ -35,18 +35,13 @@ Manager.prototype.broadcast = function (key, value) {
 };
 
 Manager.prototype.handleEvent = function (event) {
-    // if ( event.type === 'unload' ) {
-    //     this.destroy();
-    // } else if ( event.key === 'broadcast' ) {
-    //     try {
-    //         var data = JSON.parse( event.newValue );
-    //         if ( data.id !== this.id ) {
-    //             this[ data.type ]( data );
-    //         }
-    //     } catch ( error ) {}
-    // }
-    console.log(event);
-    debugger;
+    if (event.type === 'unload') {
+        this.destroy();
+    } else if (event.key === 'broadcast') {
+        try {
+            debugger;
+        } catch ( error ) {}
+    }
 };
 
 /**
