@@ -43,6 +43,19 @@ Manager.prototype.destroy = function () {
     window.removeEventListener( 'unload', this, false );
 };
 
+Manager.prototype.getIds = function () {
+	var currentTabIds = localStorage.tabIds;
+	var tabIds;
+
+	if (currentTabIds) {
+		tabIds = JSON.parse(currentTabIds);
+	} else {
+		tabIds = [];
+	}
+
+	return tabIds;
+};
+
 /**
  * Broadcast message to all managed tabs
  *
