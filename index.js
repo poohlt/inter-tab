@@ -8,15 +8,8 @@
 function Manager(opts) {
 	this.id = Math.random();
 
-	var currentTabIds = localStorage.tabIds;
-	var tabIds;
-
-	if (currentTabIds) {
-		tabIds = JSON.parse(currentTabIds);
-		tabIds.push(this.id);
-	} else {
-		tabIds = [this.id];
-	}
+	var tabIds = this.getIds();
+	tabIds.push(this.id);
 
 	try {
         localStorage.setItem('tabIds', JSON.stringify(tabIds));
@@ -28,8 +21,7 @@ function Manager(opts) {
 }
 
 Manager.prototype.destroy = function () {
-	var currentTabIds = localStorage.tabIds;
-	var tabIds = JSON.parse(currentTabIds);
+	var tabIds = this.getIds();
 
 	// Remove the current tabIds from storage array
 	var index = tabIds.indexOf(this.id);
