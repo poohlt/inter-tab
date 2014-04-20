@@ -96,6 +96,10 @@ Manager.prototype.send = function (id, key, value) {
 	try {
         localStorage.setItem('message', JSON.stringify(data));
     } catch (error) {}
+
+    try {
+        localStorage.setItem('message', JSON.stringify({}));
+    } catch (error) {}
 };
 
 
