@@ -60,7 +60,7 @@ Manager.prototype.broadcast = function (key, value) {
 	};
 
     try {
-        localStorage.setItem( 'broadcast', JSON.stringify(data));
+        localStorage.setItem('broadcast', JSON.stringify(data));
     } catch (error) {}
 };
 
@@ -69,8 +69,15 @@ Manager.prototype.handleEvent = function (event) {
         this.destroy();
     } else if (event.key === 'broadcast') {
         try {
-            debugger;
+            console.log(event);
         } catch ( error ) {}
+    } else if (event.key === 'message') {
+		var data = JSON.parse(event.newValue);
+		if (data.id === this.id) {
+			try {
+				console.log(data);
+			} catch ( error ) {}
+		}
     }
 };
 
@@ -80,7 +87,15 @@ Manager.prototype.handleEvent = function (event) {
  */
 
 Manager.prototype.send = function (id, key, value) {
+	var data = {
+		id: id,
+		key: key,
+		value: value
+	};
 
+	try {
+        localStorage.setItem('message', JSON.stringify(data));
+    } catch (error) {}
 };
 
 
