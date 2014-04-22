@@ -35,15 +35,12 @@ Manager.prototype.destroy = function () {
 
 Manager.prototype.getTabs = function () {
 	var currentTabs = localStorage.tabs;
-	var tabs;
 
 	if (currentTabs) {
-		tabs = JSON.parse(currentTabs);
+		return JSON.parse(currentTabs);
 	} else {
-		tabs = {};
+		return {};
 	}
-
-	return tabs;
 };
 
 /**
