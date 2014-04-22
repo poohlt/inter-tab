@@ -97,7 +97,6 @@ Manager.prototype.send = function (id, key, value) {
     } catch (error) {}
 };
 
-
 /**
  * Associate data with a specific tab
  *
@@ -115,7 +114,6 @@ Manager.prototype.set = function (id, key, value) {
 	}
 };
 
-
 /**
  * Retrieve data for a specific tab
  *
@@ -126,9 +124,9 @@ Manager.prototype.get = function (id, key) {
 
 	if (tabs[id]) {
 		return tabs[id][key];
+	} else {
+		return;
 	}
-
-	return;
 };
 
 
