@@ -122,7 +122,13 @@ Manager.prototype.set = function (id, key, value) {
  */
 
 Manager.prototype.get = function (id, key) {
+	var tabs = this.getTabs();
 
+	if (tabs[id]) {
+		return tabs[id][key];
+	}
+
+	return;
 };
 
 
