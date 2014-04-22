@@ -9,10 +9,7 @@ function Manager(opts) {
 	this.id = Math.random();
 
 	var tabs = this.getTabs();
-	var tabData = {
-		id: this.id
-	};
-	tabs.push(tabData);
+	tabs[this.id] = {};
 
 	try {
         localStorage.setItem('tabs', JSON.stringify(tabs));
@@ -26,15 +23,10 @@ function Manager(opts) {
 Manager.prototype.destroy = function () {
 	var tabs = this.getTabs();
 
-	var _this = this
-	// Remove the current tabs from storage array
-	var newTabs = tabs.filter(function(e) {
-		return e.id != _this.id;
-	});
-	// debugger;
+	delete tabs[this.id];
 
 	try {
-        localStorage.setItem('tabs', JSON.stringify(newTabs));
+        localStorage.setItem('tabs', JSON.stringify(tabs));
     } catch (error) {}
 
     window.removeEventListener( 'storage', this, false );
@@ -48,7 +40,7 @@ Manager.prototype.getTabs = function () {
 	if (currentTabs) {
 		tabs = JSON.parse(currentTabs);
 	} else {
-		tabs = [];
+		tabs = {};
 	}
 
 	return tabs;
