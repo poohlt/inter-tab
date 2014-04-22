@@ -8,11 +8,14 @@
 function Manager(opts) {
 	this.id = Math.random();
 
-	var tabIds = this.getIds();
-	tabIds.push(this.id);
+	var tabs = this.getTabs();
+	var tabData = {
+		id: this.id
+	};
+	tabs.push(tabData);
 
 	try {
-        localStorage.setItem('tabIds', JSON.stringify(tabIds));
+        localStorage.setItem('tabs', JSON.stringify(tabs));
     } catch (error) {}
 
 	// Listen to event when tab is closed or storage changes
@@ -21,31 +24,34 @@ function Manager(opts) {
 }
 
 Manager.prototype.destroy = function () {
-	var tabIds = this.getIds();
+	var tabs = this.getTabs();
 
-	// Remove the current tabIds from storage array
-	var index = tabIds.indexOf(this.id);
-    tabIds.splice(index, 1);
+	var _this = this
+	// Remove the current tabs from storage array
+	var newTabs = tabs.filter(function(e) {
+		return e.id != _this.id;
+	});
+	// debugger;
 
 	try {
-        localStorage.setItem('tabIds', JSON.stringify(tabIds));
+        localStorage.setItem('tabs', JSON.stringify(newTabs));
     } catch (error) {}
 
     window.removeEventListener( 'storage', this, false );
     window.removeEventListener( 'unload', this, false );
 };
 
-Manager.prototype.getIds = function () {
-	var currentTabIds = localStorage.tabIds;
-	var tabIds;
+Manager.prototype.getTabs = function () {
+	var currentTabs = localStorage.tabs;
+	var tabs;
 
-	if (currentTabIds) {
-		tabIds = JSON.parse(currentTabIds);
+	if (currentTabs) {
+		tabs = JSON.parse(currentTabs);
 	} else {
-		tabIds = [];
+		tabs = [];
 	}
 
-	return tabIds;
+	return tabs;
 };
 
 /**
@@ -109,7 +115,15 @@ Manager.prototype.send = function (id, key, value) {
  */
 
 Manager.prototype.set = function (id, key, value) {
+	var tabs = this.getTabs();
 
+	if (tabs[id]) {
+		tabs[id][key] = value;
+
+		try {
+			localStorage.setItem('tabs', JSON.stringify(tabs));
+        } catch (error) {}
+	}
 };
 
 
