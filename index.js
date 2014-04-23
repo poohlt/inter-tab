@@ -63,17 +63,26 @@ Manager.prototype.handleEvent = function (event) {
     if (event.type === 'unload') {
         this.destroy();
     } else if (event.key === 'broadcast') {
+		var bData = JSON.parse(event.newValue);
         try {
-            console.log(event);
-        } catch ( error ) {}
+            this.onBroadcast(bData);
+        } catch (error) {}
     } else if (event.key === 'message') {
-		var data = JSON.parse(event.newValue);
+		var mData = JSON.parse(event.newValue);
 		if (data.id === this.id) {
 			try {
-				console.log(data);
-			} catch ( error ) {}
+				this.onMessage(mData);
+			} catch (error) {}
 		}
     }
+};
+
+Manager.prototype.onBroadcast = function (event) {
+	console.log(event);
+};
+
+Manager.prototype.onMessage = function (event) {
+	console.log(event);
 };
 
 /**
