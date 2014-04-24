@@ -57,16 +57,23 @@ Manager.prototype.broadcast = function (key, value) {
     try {
         localStorage.setItem('broadcast', JSON.stringify(data));
     } catch (error) {}
+
+    try {
+        localStorage.setItem('broadcast', JSON.stringify({}));
+    } catch (error) {}
 };
 
 Manager.prototype.handleEvent = function (event) {
     if (event.type === 'unload') {
         this.destroy();
     } else if (event.key === 'broadcast') {
-        var bData = JSON.parse(event.newValue);
-        try {
-            this.onBroadcast(bData);
-        } catch (error) {}
+        // test for dummy broadcast
+        if (event.newValue != "{}"){
+            var bData = JSON.parse(event.newValue);
+            try {
+                this.onBroadcast(bData);
+            } catch (error) {}
+        }
     } else if (event.key === 'message') {
         var mData = JSON.parse(event.newValue);
         if (data.id === this.id) {
