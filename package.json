@@ -3,7 +3,10 @@
   "description": "Framework for browser inter-tab communication",
   "version": "0.0.1",
   "devDependencies": {
-    "node-static": "~0.7.0"
+    "node-static": "~0.7.0",
+    "browserify": "2.35.1",
+    "expect.js": "0.2.0",
+    "zuul": "1.5.4",
   },
   "repository": {
     "type": "git",
