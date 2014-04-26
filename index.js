@@ -1,4 +1,10 @@
 /**
+ * Module exports.
+ */
+
+module.exports = Manager;
+
+/**
  * Constructor for the inter-tab manager
  *
  * @param {Object} options
