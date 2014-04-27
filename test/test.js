@@ -2,10 +2,9 @@ var Manager = require('../');
 var expect = require('expect.js');
 
 describe('inter-tab', function(){
-
-  it('should run simple test', function(){
-    // var test = new Manager();
-    expect(1).to.be(1);
-  });
-
+    it('should create tab id', function(){
+        var tab = new Manager();
+        expect(tab.id).to.be.a('number');
+        tab.destroy();
+    });
 });
