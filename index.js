@@ -1,8 +1,3 @@
-/**
- * Module exports.
- */
-
-module.exports = Manager;
 
 /**
  * Constructor for the inter-tab manager
@@ -151,11 +146,13 @@ Manager.prototype.get = function (id, key) {
     }
 };
 
+/**
+ * Expose the inter-tab manager based on environment
+ *
+ */
 
-// Expose the inter-tab manager
-
-// if (typeof module === 'object' && module.exports) {
-//     module.exports = Manager;
-// } else {
-//     this.it = Manager;
-// }
+if (typeof module === 'object' && module.exports) {
+    module.exports = Manager;
+} else {
+    this.it = Manager;
+}
