@@ -5,14 +5,14 @@ A common javascript module that provides a basic interface to pass objects betwe
 
 ###Constructor
 #### Manager():
-  Constructor for the inter-tab manager.
+  Constructor for the inter-tab manager. Each instance should be associated with an active tab. The manger instance will automatically destroy itself when the tab where it was created is closed.
 ```js
 var tab = Manager();
 ```
 
 ### Properties
 ##### id:
-An `id` is associated with a specific instance of the tab manager to identify each tab. `id` is randomly generated when a Manager instance is constructed.
+An `id`, a `float` between 0 and 1, is associated with a specific instance of the tab manager to identify each tab. `id` is randomly generated when a manager instance is constructed.
 
 ### Methods
 
@@ -36,7 +36,12 @@ tab1.broadcast("Hello", "World");
 var tab1 = Manager();
 var tab2 = Manager();
 tab1.getTabs();
-// example output
+/*
+{
+  "0.00247958698309958": {},
+  "0.7932477160356939": {}
+}
+*/
 ```
 
 ##### send(id, key, value):
