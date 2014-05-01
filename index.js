@@ -24,14 +24,16 @@ function Manager(opts) {
 Manager.prototype.destroy = function () {
     var tabs = this.getTabs();
 
+    this.onDestroy(tabs[this.id]);
+
     delete tabs[this.id];
 
     try {
         localStorage.setItem('tabs', JSON.stringify(tabs));
     } catch (error) {}
 
-    window.removeEventListener( 'storage', this, false );
-    window.removeEventListener( 'unload', this, false );
+    window.removeEventListener('storage', this, false);
+    window.removeEventListener('unload', this, false);
 };
 
 Manager.prototype.getTabs = function () {
@@ -91,6 +93,10 @@ Manager.prototype.onBroadcast = function (event) {
 
 Manager.prototype.onMessage = function (event) {
     console.log(event);
+};
+
+Manager.prototype.onDestroy = function (tab) {
+    console.log(tab);
 };
 
 /**
