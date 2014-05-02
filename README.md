@@ -82,7 +82,7 @@ tab1.get(tab2.id, "bar");
 ```
 
 ### Events and handlers
-All events are private at the current stage of development. The only way to access events is through an event handler. Two event handlers are provided by the API:
+All events are private at the current stage of development. The only way to access events is through an event handler. Three event handlers are provided by the API:
 
 #### onBroadcast(data):
 Called when a tab receieves a broadcast. `data` is the key-value pair in the arguments of `broadcast` method.
