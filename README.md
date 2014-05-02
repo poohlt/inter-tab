@@ -100,6 +100,14 @@ tab.onMessage = function (event) {
 };
 // Logs the event object from message event to console.
 ```
+#### onDestroy(tab):
+Called when a tab is about to be destroyed (window closed or `destroy` method called). `tab` is an object containing all key-value pairs associated with the tab that is about to be closed.
+```js
+tab.onDestroy = function (tab) {
+    console.log(tab);
+};
+// Logs the tab object which is about to be destroyed to console.
+```
 
 ## License
 
