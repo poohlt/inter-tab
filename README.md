@@ -90,7 +90,14 @@ Called when a tab receieves a broadcast. `data` is the key-value pair in the arg
 tab.onBroadcast = function (event) {
     console.log(event);
 };
-// Logs the event object from broadcast event to console.
+/*
+Logs the event object from broadcast event to console.
+An event object is in the format:
+{
+  key: "broadcast key",
+  value: "braocast value"
+}
+*/
 ```
 #### onMessage(data):
 Called when a tab receieves a message. `data` is the key-value pair in the arguments of `message` method.
@@ -98,7 +105,15 @@ Called when a tab receieves a message. `data` is the key-value pair in the argum
 tab.onMessage = function (event) {
     console.log(event);
 };
-// Logs the event object from message event to console.
+/*
+Logs the event object from message event to console.
+An event object is in the format:
+{
+  id: (id of this tab),
+  key: "broadcast key",
+  value: "braocast value"
+}
+*/
 ```
 #### onDestroy(tab):
 Called when a tab is about to be destroyed (window closed or `destroy` method called). `tab` is an object containing all key-value pairs associated with the tab that is about to be closed.

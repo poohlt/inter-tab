@@ -79,7 +79,7 @@ Manager.prototype.handleEvent = function (event) {
         }
     } else if (event.key === 'message') {
         var mData = JSON.parse(event.newValue);
-        if (data.id === this.id) {
+        if (mData.id === this.id) {
             try {
                 this.onMessage(mData);
             } catch (error) {}

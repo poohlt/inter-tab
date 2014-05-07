@@ -4,12 +4,12 @@ var expect = require('expect.js');
 describe('inter-tab', function(){
     var tab1, tab2;
 
-    beforeEach(function() {
+    beforeEach(function(){
         tab1 = new Manager();
         tab2 = new Manager();
     });
 
-    afterEach(function() {
+    afterEach(function(){
         tab1.destroy();
         tab2.destroy();
     });
