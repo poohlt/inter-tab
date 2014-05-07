@@ -16,19 +16,6 @@ An `id`, a `float` between 0 and 1, is associated with a specific instance of th
 
 ### Methods
 
-##### broadcast(key, value):
-
-  Broadcast a key-value pair to all currently active tabs.
-
-```js
-var tab1 = Manager();
-var tab2 = Manager();
-var tab3 = Manager();
-
-tab1.broadcast("Hello", "World");
-// tab2 and tab3 will be notified, 'onBroadcast' handler of tab2 and 3 will be called.
-```
-
 ##### getTabs():
 
   Retrive all tabs and their associated key-value pairs. The result is expressed as a javascript object, each key is an id of a tab.
@@ -44,15 +31,28 @@ tab1.getTabs();
 */
 ```
 
-##### send(id, key, value):
+##### broadcast(value):
 
-  Send a key-value pair to a single tab, specified by the `id` argument.
+  Broadcast a `value` object to all currently active tabs.
+
 ```js
 var tab1 = Manager();
 var tab2 = Manager();
 var tab3 = Manager();
 
-tab1.send(tab2.id, "Hello", "World");
+tab1.broadcast("Hello World");
+// tab2 and tab3 will be notified, 'onBroadcast' handler of tab2 and 3 will be called.
+```
+
+##### send(id, value):
+
+  Send `value` to a single tab, specified by the `id` argument.
+```js
+var tab1 = Manager();
+var tab2 = Manager();
+var tab3 = Manager();
+
+tab1.send(tab2.id, "Hello World");
 // Only tab2 will be notified. onMessage method of tab2 will be called.
 ```
 
@@ -93,10 +93,7 @@ tab.onBroadcast = function (event) {
 /*
 Logs the event object from broadcast event to console.
 An event object is in the format:
-{
-  key: "broadcast key",
-  value: "braocast value"
-}
+{  value: "braocast value" }
 */
 ```
 #### onMessage(data):
@@ -110,7 +107,6 @@ Logs the event object from message event to console.
 An event object is in the format:
 {
   id: (id of this tab),
-  key: "broadcast key",
   value: "braocast value"
 }
 */

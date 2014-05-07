@@ -51,11 +51,8 @@ Manager.prototype.getTabs = function () {
  *
  */
 
-Manager.prototype.broadcast = function (key, value) {
-    var data = {
-        key: key,
-        value: value
-    };
+Manager.prototype.broadcast = function (value) {
+    var data = { value: value };
 
     try {
         localStorage.setItem('broadcast', JSON.stringify(data));
@@ -104,10 +101,9 @@ Manager.prototype.onDestroy = function (tab) {
  *
  */
 
-Manager.prototype.send = function (id, key, value) {
+Manager.prototype.send = function (id, value) {
     var data = {
         id: id,
-        key: key,
         value: value
     };
 

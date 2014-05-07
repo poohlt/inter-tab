@@ -3,39 +3,36 @@
 <head>
   <script src = "../index.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <title>Inter-tab communication using local storage</title>
 </head>
-<body style="">
-  <h1>Broadcasts</h1>
-  <p id="broadcasts"></p>
-  <h1>Messages</h1>
-  <p id="messages"></p>
+<body>
+  <div class="container">
+      <h1 id="banner">Event Board</h1>
+      <p id="messages" class="lead text-primary"></p>
+  </div>
+
   <script type="text/javascript" charset="utf-8">
-    // var wc = new WindowController();
-    // wc.logMessage = function ( data ) {
-    //   data.text;
-    // };
-    // wc.masterDidChange();
-    // var input = $( 'input' );
-    // function broadcast () {
-    //     var value = input.value;
-    //     input.value = '';
-    //     if ( value ) {
-    //       wc.broadcast( 'logMessage', { text: value });
-    //     }
-    // };
     var test = new Manager();
+
+    $('#banner').append(" of " + test.id);
+
+    test.broadcast("Hello, " + test.id + " has joined the party <br/>");
+
     test.onBroadcast = function (data){
-      var stuff = data.value;
-      $('#broadcasts').append("\n Broadcast Recieved:   ");
-      $('#broadcasts').append(stuff);
+      $('#messages').append("<br/> Broadcast Recieved:   ");
+      $('#messages').append(data.value);
     };
+
     test.onMessage = function (data){
-      debugger;
-      var stuff = data.value;
-      $('#broadcasts').append("\n Broadcast Recieved:   ");
-      $('#broadcasts').append(stuff);
+      $('#messages').append("<br/> Direct message Recieved:   ");
+      $('#messages').append(data.value);
+    };
+
+    test.onDestroy = function (data){
+      this.broadcast(test.id + " has left the party <br/>");
     };
   </script>
+
 </body>
 </html>
